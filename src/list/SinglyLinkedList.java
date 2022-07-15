@@ -82,24 +82,44 @@ public class SinglyLinkedList {
        return size;
     }
 
+    public void revereIterate(){
+       if(head==null || head.next==null){
+           return;
+       }
+       Node preNode = head;
+       Node curNode = head.next;
+       while (curNode!=null){
+           Node nextNode = curNode.next;
+           curNode.next=preNode;
+           preNode=curNode;
+           curNode=nextNode;
+       }
+       head.next=null;
+       head=preNode;
+    }
+
+    public Node recusiveReverse(Node head){
+       if(head==null||head.next==null){
+           return head;
+       }
+       Node newHead=recusiveReverse(head.next);
+       head.next.next=head;
+       head.next=null;
+       return newHead;
+    }
+
 
 
     public static void main(String[] args) {
         SinglyLinkedList sll = new SinglyLinkedList();
-        sll.addFirst(1);
         sll.addFirst(2);
+        sll.addFirst(1);
         sll.addLast(3);
         sll.print();
-        System.out.println(sll.getSize());
-        sll.removeFirst();
+        sll.revereIterate();
         sll.print();
-        System.out.println(sll.getSize());
-        sll.removeLast();
+        sll.head=sll.recusiveReverse(sll.head);
         sll.print();
-        System.out.println(sll.getSize());
-        sll.removeLast();
-        sll.print();
-        System.out.println(sll.getSize());
 
 
     }
