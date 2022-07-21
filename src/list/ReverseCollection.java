@@ -13,6 +13,7 @@ public class ReverseCollection {
         for (int i = list.size()-1; i>=0; i--) {
             list1.add(list.get(i));
         }
-        System.out.println(list1);
+        list=list1;
+        System.out.println(list);
     }
 }

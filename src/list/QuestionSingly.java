@@ -139,7 +139,7 @@ public class QuestionSingly {
         System.out.println(current.value);
 
     }
-    // deleat n-th element
+    // delete n-th element
     public void deleteNthElement(int n){
         int s=getSize();
         int a = s-n;
