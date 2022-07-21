@@ -110,6 +110,7 @@ public class SinglyLinkedList {
 
 
 
+
     public static void main(String[] args) {
         SinglyLinkedList sll = new SinglyLinkedList();
         sll.addFirst(2);
