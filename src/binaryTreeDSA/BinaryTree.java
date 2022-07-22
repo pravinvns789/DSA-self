@@ -53,7 +53,7 @@ public class BinaryTree {
         postOrder(root.right);
         System.out.print(root.value+" ");
     }
-    public void leverlOrder(Node root){
+    public void levelOrder(Node root){
         Queue<Node> q = new LinkedList<>();
         q.add(root);
         q.add(null);
@@ -89,6 +89,55 @@ public class BinaryTree {
         return left+right+1;
 
     }
+    public int sumOfNodes(Node root){
+        if(root==null){
+            return 0;
+
+        }
+        int sumLeft=sumOfNodes(root.left);
+        int sumRight=sumOfNodes(root.right);
+        return sumLeft+sumRight +root.value;
+    }
+    public int height(Node root){
+        if(root==null){
+            return 0;
+        }
+        int leftHeight=height(root.left);
+        int rightHeight=height(root.right);
+        return Math.max(leftHeight,rightHeight)+1;
+    }
+    public int diameter(Node root){
+        if(root==null){
+            return 0;
+        }
+        int dia1=diameter(root.left);
+        int dia2 =diameter(root.right);
+        int dia3=height(root.right)+height(root.left)+1;
+         return Math.max(dia1,Math.max(dia2,dia3));
+    }
+    class TreeInfo{
+        int ht;
+        int dia;
+        TreeInfo(int ht,int dia){
+            this.dia=dia;
+            this.ht=ht;
+        }
+    }
+    public TreeInfo diameter2(Node root){
+        if (root==null){
+            return new TreeInfo(0,0);
+        }
+        TreeInfo left = diameter2(root.left);
+        TreeInfo right =diameter2(root.right);
+        int myheight=Math.max(left.ht,right.ht)+1;
+        int dia1= left.dia;
+        int dia2=right.dia;
+        int dia3=left.ht+right.ht+1;
+        int mydia = Math.max(Math.max(dia1,dia2),dia3);
+        TreeInfo myInfo = new TreeInfo(myheight,mydia);
+        return myInfo;
+    }
+
     public static void main(String[] args) {
         BinaryTree btree = new BinaryTree();
         int[] nodes = {1, 2, 4, -1, -1, 5, -1, -1, 3, -1, 6, -1, -1};
@@ -100,7 +149,11 @@ public class BinaryTree {
         System.out.println();
         btree.postOrder(root);
         System.out.println();
-        btree.leverlOrder(root);
+        btree.levelOrder(root);
         System.out.println(btree.countNode(root));
+        System.out.println(btree.sumOfNodes(root));
+        System.out.println(btree.height(root));
+        System.out.println(btree.diameter(root));
+        System.out.println(btree.diameter2(root).dia);
     }
 }
